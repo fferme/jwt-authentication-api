@@ -1,4 +1,4 @@
-package com.ferme.jwtauthentication.repositories;
+package com.ferme.jwtauthentication.models;
 
 
 import java.sql.Types;
@@ -47,7 +47,7 @@ public class User {
     private UUID id;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(length = 15, nullable = false)
     private String username;
 
     @NotNull
@@ -55,7 +55,7 @@ public class User {
     private String password;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(length = 10, nullable = false)
     @Convert(converter = UserRoleConverter.class)
     private UserRole role;
 

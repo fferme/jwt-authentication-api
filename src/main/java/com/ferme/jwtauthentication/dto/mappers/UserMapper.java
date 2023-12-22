@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.ferme.jwtauthentication.dto.UserDTO;
 import com.ferme.jwtauthentication.enums.UserRole;
-import com.ferme.jwtauthentication.repositories.User;
+import com.ferme.jwtauthentication.models.User;
 
 @Component
 public class UserMapper {
