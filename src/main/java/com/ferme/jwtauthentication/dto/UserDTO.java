@@ -9,12 +9,13 @@ import com.ferme.jwtauthentication.enums.UserRole;
 import com.ferme.jwtauthentication.enums.validation.ValueOfEnum;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record UserDTO(
     @JsonProperty("_id") UUID id,
-    @NotNull String username,
-    @NotNull String password, 
+    @NotBlank @NotNull String username,
+    @NotBlank @NotNull String password, 
     @NotNull @Valid @ValueOfEnum(enumClass = UserRole.class) String role,
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime createDate,
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime updateDate

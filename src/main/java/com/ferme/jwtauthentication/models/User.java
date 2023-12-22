@@ -21,6 +21,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -46,10 +47,12 @@ public class User {
     @JsonProperty("_id")
     private UUID id;
 
+    @NotBlank
     @NotNull
     @Column(length = 15, nullable = false)
     private String username;
 
+    @NotBlank
     @NotNull
     @Column(nullable = false)
     private String password;
