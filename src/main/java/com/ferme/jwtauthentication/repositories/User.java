@@ -66,7 +66,6 @@ public class User {
     private final LocalDateTime createDate = LocalDateTime.now(ZoneId.of(BR_TIMEZONE));
 
     @Getter
-    @NonNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = BR_TIMEZONE)
     @Column(nullable = false)
     private LocalDateTime updateDate;
