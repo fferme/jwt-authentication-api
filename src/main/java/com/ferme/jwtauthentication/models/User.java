@@ -4,9 +4,14 @@ package com.ferme.jwtauthentication.models;
 import java.sql.Types;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.JdbcTypeCode;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -37,7 +42,7 @@ import lombok.NonNull;
 @Builder
 @Table(name = "tb_user")
 @Entity
-public class User {
+public class User implements UserDetails {
     private static final String BR_TIMEZONE = "America/Sao_Paulo";
 
     @Id
@@ -76,5 +81,32 @@ public class User {
     @PrePersist
     public void initDates() {
         this.updateDate = LocalDateTime.now(ZoneId.of(BR_TIMEZONE));
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return (this.role == UserRole.ADMIN) 
+        ? List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"))
+        : List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
