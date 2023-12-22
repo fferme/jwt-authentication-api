@@ -1,14 +1,15 @@
 package com.ferme.jwtauthentication.dto;
 
-import com.ferme.jwtauthentication.enums.UserRole;
+import java.util.UUID;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
 public record UserDTO(
+    @NotNull UUID id,
     @NotNull String username,
     @NotNull String password, 
-    @NotNull @Valid UserRole role
+    @NotNull @Valid String role
 ) {
     
 }
