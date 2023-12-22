@@ -4,6 +4,7 @@ import lombok.ToString;
 
 @ToString
 public enum UserRole {
+    OWNER("Owner"),
     ADMIN("Admin"),
     GUEST("Guest");
 

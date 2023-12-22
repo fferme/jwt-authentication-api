@@ -1,9 +1,7 @@
 package com.ferme.jwtauthentication.services;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -25,11 +23,7 @@ public class UserService {
     private final UserMapper userMapper;
 
     public List<UserDTO> getAll() {
-        return userRepository.findAll()
-        .stream()
-        .map(userMapper::toDTO)
-        .sorted(Comparator.comparing(UserDTO::username))
-        .collect(Collectors.toList());
+        return userMapper.toDTOList(userRepository.findAll());
     }
 
     public UserDTO findById(@NotNull UUID id) {
@@ -41,16 +35,24 @@ public class UserService {
         return userMapper.toDTO(userRepository.save(userMapper.toEntity(userDTO)));
     }
 
-    // public UserDTO update(@NotNull UUID id, @Valid @NotNull UserDTO newUserDTO) {
-    //     return userRepository.findById(id)
-    //         .map(userFound -> {
-    //             User user = userMapper.toEntity(newUserDTO);
-    //             userFound.setUsername(newUserDTO.username());
-    //             userFound.setPassword(newUserDTO.password());
-    //             userFound.setRole(userMapper.);
+    public UserDTO update(@NotNull UUID id, @Valid @NotNull UserDTO newUserDTO) {
+        return userRepository.findById(id)
+            .map(userFound -> {
+                userFound.setUsername(newUserDTO.username());
+                userFound.setPassword(newUserDTO.password());
+                userFound.setRole(userMapper.convertUserRoleValue(newUserDTO.role()));
 
-    //             return 
-    //         })
-    // }
+                return userMapper.toDTO(userRepository.save(userFound));
+            }).orElseThrow(() -> new RecordNotFoundException(id));
+    }
+
+    public void deleteById(@NotNull UUID id) {
+        userRepository.delete(userRepository.findById(id)
+            .orElseThrow(() -> new RecordNotFoundException(id)));
+    }
+
+    public void deleteAll() {
+        userRepository.deleteAll();
+    }
     
 }
