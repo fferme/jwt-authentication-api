@@ -8,5 +8,5 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.ferme.jwtauthentication.models.User;
 
 public interface UserRepository extends JpaRepository<User, UUID> {
-    UserDetails findByUsername(String username);
+    UserDetails findByLogin(String login);
 }

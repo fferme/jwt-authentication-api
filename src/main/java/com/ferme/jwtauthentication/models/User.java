@@ -32,6 +32,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -41,6 +42,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "tb_user")
+@Getter
+@EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
     private static final String BR_TIMEZONE = "America/Sao_Paulo";
 
@@ -54,7 +57,7 @@ public class User implements UserDetails {
     @NotBlank
     @NotNull
     @Column(length = 15, nullable = false)
-    private String username;
+    private String login;
 
     @NotBlank
     @NotNull
@@ -85,9 +88,17 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return (this.role == UserRole.ADMIN) 
-            ? List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"))
-            : List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }@Override
+
+    public String getPassword() {
+        return password;
     }
 
     @Override

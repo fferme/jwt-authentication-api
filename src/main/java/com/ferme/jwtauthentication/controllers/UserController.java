@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ferme.jwtauthentication.dto.AuthenticationDTO;
 import com.ferme.jwtauthentication.dto.UserDTO;
 import com.ferme.jwtauthentication.services.UserService;
 

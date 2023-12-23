@@ -12,10 +12,11 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class AuthorizationService implements UserDetailsService {
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        System.out.println(username);
+        return userRepository.findByLogin(username);
     }
 }

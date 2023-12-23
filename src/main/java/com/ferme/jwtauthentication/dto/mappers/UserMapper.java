@@ -35,7 +35,7 @@ public class UserMapper {
         return (userDTO == null) ? null
         : User.builder()
             .id(userDTO.id())
-            .username(userDTO.username())
+            .login(userDTO.login())
             .password(userDTO.password())
             .role(convertUserRoleValue(userDTO.role()))
             .build();

@@ -35,15 +35,15 @@ public class UserService {
     }
 
     public UserDTO create(@Valid @NotNull UserDTO userDTO) {
-        if (userRepository.findByUsername(userDTO.username()) != null) {
-            throw new RecordFieldExists("Username", userDTO.username());
+        if (userRepository.findByLogin(userDTO.login()) != null) {
+            throw new RecordFieldExists("Username", userDTO.login());
         }
             
         String encryptedPassword = new BCryptPasswordEncoder()
             .encode(userDTO.password());
             
         User newUser = User.builder()
-            .username(userDTO.username())
+            .login(userDTO.login())
             .password(encryptedPassword)
             .role(userMapper.convertUserRoleValue(userDTO.role()))
             .build();
@@ -54,7 +54,7 @@ public class UserService {
     public UserDTO update(@NotNull UUID id, @Valid @NotNull UserDTO newUserDTO) {
         return userRepository.findById(id)
             .map(userFound -> {
-                userFound.setUsername(newUserDTO.username());
+                userFound.setLogin(newUserDTO.login());
                 userFound.setPassword(newUserDTO.password());
                 userFound.setRole(userMapper.convertUserRoleValue(newUserDTO.role()));
 

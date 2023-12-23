@@ -20,18 +20,21 @@ public class SecurityConfigurations {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             // .authorizeHttpRequests(authorize -> authorize
-            //     .requestMatchers(HttpMethod.POST, "/auth/users").hasRole("ADMIN")
-            //     .requestMatchers(HttpMethod.DELETE, "/auth/users").hasRole("ADMIN")
-            //     .anyRequest().authenticated()
-            // )
+            //             .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+            //             .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+            //             .requestMatchers(HttpMethod.POST, "/product").hasRole("ADMIN")
+            //             .anyRequest().authenticated()
+            //     )
             .build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
