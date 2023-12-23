@@ -34,14 +34,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-@Table(name = "tb_user")
 @Entity
+@Table(name = "tb_user")
 public class User implements UserDetails {
     private static final String BR_TIMEZONE = "America/Sao_Paulo";
 
@@ -67,12 +66,13 @@ public class User implements UserDetails {
     @Convert(converter = UserRoleConverter.class)
     private UserRole role;
 
+    @NotNull
     @Getter
-    @NonNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = BR_TIMEZONE)
     @Column(updatable = false, nullable = false)
     private final LocalDateTime createDate = LocalDateTime.now(ZoneId.of(BR_TIMEZONE));
 
+    @NotNull
     @Getter
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = BR_TIMEZONE)
     @Column(nullable = false)
@@ -86,8 +86,8 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return (this.role == UserRole.ADMIN) 
-        ? List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"))
-        : List.of(new SimpleGrantedAuthority("ROLE_USER"));
+            ? List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"))
+            : List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override

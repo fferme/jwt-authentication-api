@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ferme.jwtauthentication.enums.UserRole;
 import com.ferme.jwtauthentication.enums.validation.ValueOfEnum;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,7 +15,7 @@ public record UserDTO(
     @JsonProperty("_id") UUID id,
     @NotBlank @NotNull String username,
     @NotBlank @NotNull String password, 
-    @NotNull @Valid @ValueOfEnum(enumClass = UserRole.class) String role,
+    @NotNull @ValueOfEnum(enumClass = UserRole.class) String role,
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime createDate,
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime updateDate
 ) {

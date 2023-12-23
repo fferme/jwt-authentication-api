@@ -1,20 +1,19 @@
 package com.ferme.jwtauthentication.enums;
 
-import lombok.ToString;
-
-@ToString
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+    
+@AllArgsConstructor
+@Getter
 public enum UserRole {
     OWNER("Owner"),
     ADMIN("Admin"),
     GUEST("Guest");
 
     private String value;
-
-    private UserRole(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
+    
+    @Override
+    public String toString() {
         return value;
     }
 }

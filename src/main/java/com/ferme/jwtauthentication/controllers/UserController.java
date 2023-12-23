@@ -45,12 +45,12 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public UserDTO create(@RequestBody @Valid @NotNull UserDTO userDTO) {
+    public UserDTO create(@RequestBody @Valid UserDTO userDTO) {
         return userService.create(userDTO);
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public UserDTO update(@PathVariable @NotNull UUID id, @RequestBody @Valid @NotNull UserDTO newUserDTO) {
         return userService.update(id, newUserDTO);
     }

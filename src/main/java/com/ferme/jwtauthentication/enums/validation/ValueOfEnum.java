@@ -21,7 +21,7 @@ import jakarta.validation.Payload;
 @Constraint(validatedBy = ValueOfEnumValidator.class)
 public @interface ValueOfEnum {
     Class<? extends Enum<?>> enumClass();
-    String message() default "must be any of enum {enumClass}";
+    String message() default "must be any of {enumValues}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
