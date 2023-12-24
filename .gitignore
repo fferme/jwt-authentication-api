@@ -39,3 +39,12 @@ target
 secrets.yml
 .gradletasknamecache
 .sts4-cache
+
+# Intellij
+.idea/
+
+# Maven
+log/
+target/
+
+

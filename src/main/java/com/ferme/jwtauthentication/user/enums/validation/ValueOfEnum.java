@@ -1,4 +1,4 @@
-package com.ferme.jwtauthentication.enums.validation;
+package com.ferme.jwtauthentication.user.enums.validation;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.CONSTRUCTOR;

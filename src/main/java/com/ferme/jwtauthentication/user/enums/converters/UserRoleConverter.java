@@ -1,8 +1,8 @@
-package com.ferme.jwtauthentication.enums.converters;
+package com.ferme.jwtauthentication.user.enums.converters;
 
 import java.util.stream.Stream;
 
-import com.ferme.jwtauthentication.enums.UserRole;
+import com.ferme.jwtauthentication.user.enums.UserRole;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

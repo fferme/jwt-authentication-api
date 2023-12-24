@@ -1,4 +1,4 @@
-package com.ferme.jwtauthentication.dto;
+package com.ferme.jwtauthentication.infra.security.dto;
 
 public record AuthenticationDTO(
     String login,

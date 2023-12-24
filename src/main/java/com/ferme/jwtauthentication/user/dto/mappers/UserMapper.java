@@ -1,4 +1,4 @@
-package com.ferme.jwtauthentication.dto.mappers;
+package com.ferme.jwtauthentication.user.dto.mappers;
 
 import java.util.Collections;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.ferme.jwtauthentication.dto.UserDTO;
-import com.ferme.jwtauthentication.enums.UserRole;
-import com.ferme.jwtauthentication.models.User;
+import com.ferme.jwtauthentication.user.dto.UserDTO;
+import com.ferme.jwtauthentication.user.enums.UserRole;
+import com.ferme.jwtauthentication.user.models.User;
 
 @Component
 public class UserMapper {

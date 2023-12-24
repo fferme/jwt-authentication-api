@@ -1,12 +1,12 @@
-package com.ferme.jwtauthentication.controllers;
+package com.ferme.jwtauthentication.application.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.ferme.jwtauthentication.exceptions.RecordFieldExists;
-import com.ferme.jwtauthentication.exceptions.RecordNotFoundException;
+import com.ferme.jwtauthentication.application.exceptions.RecordFieldExists;
+import com.ferme.jwtauthentication.application.exceptions.RecordNotFoundException;
 
 @RestControllerAdvice
 public class ApplicationControllerAdvice {

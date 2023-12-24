@@ -1,4 +1,4 @@
-package com.ferme.jwtauthentication.enums.validation;
+package com.ferme.jwtauthentication.user.enums.validation;
 
 import java.util.List;
 import java.util.stream.Collectors;

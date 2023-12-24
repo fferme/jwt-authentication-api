@@ -1,4 +1,4 @@
-package com.ferme.jwtauthentication.exceptions;
+package com.ferme.jwtauthentication.application.exceptions;
 
 public class RecordFieldExists extends RuntimeException {
     public RecordFieldExists(String fieldName, String fieldValue) {

@@ -1,4 +1,4 @@
-package com.ferme.jwtauthentication.controllers;
+package com.ferme.jwtauthentication.user.controllers;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ferme.jwtauthentication.dto.AuthenticationDTO;
-import com.ferme.jwtauthentication.dto.UserDTO;
-import com.ferme.jwtauthentication.services.UserService;
+import com.ferme.jwtauthentication.user.dto.UserDTO;
+import com.ferme.jwtauthentication.user.services.UserService;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

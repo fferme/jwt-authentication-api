@@ -1,4 +1,4 @@
-package com.ferme.jwtauthentication.enums;
+package com.ferme.jwtauthentication.user.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

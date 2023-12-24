@@ -1,4 +1,4 @@
-package com.ferme.jwtauthentication.exceptions;
+package com.ferme.jwtauthentication.application.exceptions;
 
 import java.util.UUID;
 

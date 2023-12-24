@@ -1,4 +1,4 @@
-package com.ferme.jwtauthentication.models;
+package com.ferme.jwtauthentication.user.models;
 
 
 import java.sql.Types;
@@ -15,8 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ferme.jwtauthentication.enums.UserRole;
-import com.ferme.jwtauthentication.enums.converters.UserRoleConverter;
+import com.ferme.jwtauthentication.user.enums.UserRole;
+import com.ferme.jwtauthentication.user.enums.converters.UserRoleConverter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -95,10 +95,6 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return login;
-    }@Override
-
-    public String getPassword() {
-        return password;
     }
 
     @Override
