@@ -2,7 +2,7 @@ package com.ferme.jwtauthentication.user.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-    
+
 @AllArgsConstructor
 @Getter
 public enum UserRole {
@@ -10,8 +10,8 @@ public enum UserRole {
     ADMIN("Admin"),
     GUEST("Guest");
 
-    private String value;
-    
+    private final String value;
+
     @Override
     public String toString() {
         return value;
