@@ -24,16 +24,16 @@ public class UserService {
     private final UserMapper userMapper;
 
     public List<UserDTO> getAll() {
-        return userMapper.toDTOList(userRepository.findAll());
+        return this.userMapper.toDTOList(this.userRepository.findAll());
     }
 
     public UserDTO findById(@NotNull UUID id) {
-        return userRepository.findById(id).map(userMapper::toDTO)
-                             .orElseThrow(() -> new RecordNotFoundException(id));
+        return this.userRepository.findById(id).map(this.userMapper::toDTO)
+                                  .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
     public UserDTO create(@Valid @NotNull UserDTO userDTO) {
-        if (userRepository.findByLogin(userDTO.login()) != null) {
+        if (this.userRepository.findByLogin(userDTO.login()) != null) {
             throw new RecordFieldExistsException("Username", userDTO.login());
         }
 
@@ -43,30 +43,33 @@ public class UserService {
         User newUser = User.builder()
                            .login(userDTO.login())
                            .password(encryptedPassword)
-                           .role(userMapper.convertUserRoleValue(userDTO.role()))
+                           .role(this.userMapper.convertUserRoleValue(userDTO.role()))
                            .build();
 
-        return userMapper.toDTO(userRepository.save(newUser));
+        return this.userMapper.toDTO(this.userRepository.save(newUser));
     }
 
     public UserDTO update(@NotNull UUID id, @Valid @NotNull UserDTO newUserDTO) {
-        return userRepository.findById(id)
-                             .map(userFound -> {
-                                 userFound.setLogin(newUserDTO.login());
-                                 userFound.setPassword(newUserDTO.password());
-                                 userFound.setRole(userMapper.convertUserRoleValue(newUserDTO.role()));
+        return this.userRepository.findById(id)
+                                  .map(userFound -> {
+                                      String encryptedPassword = new BCryptPasswordEncoder()
+                                          .encode(newUserDTO.password());
 
-                                 return userMapper.toDTO(userRepository.save(userFound));
-                             }).orElseThrow(() -> new RecordNotFoundException(id));
+                                      userFound.setLogin(newUserDTO.login());
+                                      userFound.setPassword(encryptedPassword);
+                                      userFound.setRole(this.userMapper.convertUserRoleValue(newUserDTO.role()));
+
+                                      return this.userMapper.toDTO(this.userRepository.save(userFound));
+                                  }).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
     public void deleteById(@NotNull UUID id) {
-        userRepository.delete(userRepository.findById(id)
-                                            .orElseThrow(() -> new RecordNotFoundException(id)));
+        this.userRepository.delete(this.userRepository.findById(id)
+                                                      .orElseThrow(() -> new RecordNotFoundException(id)));
     }
 
     public void deleteAll() {
-        userRepository.deleteAll();
+        this.userRepository.deleteAll();
     }
 
 }

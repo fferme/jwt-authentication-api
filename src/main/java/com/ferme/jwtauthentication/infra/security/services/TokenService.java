@@ -24,9 +24,9 @@ public class TokenService {
 
     public String generate(User user) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
+            Algorithm algorithm = Algorithm.HMAC256(this.secret);
             return JWT.create()
-                      .withIssuer(issuer)
+                      .withIssuer(this.issuer)
                       .withSubject(user.getLogin())
                       .withExpiresAt(genExpirationDate())
                       .sign(algorithm);
@@ -38,9 +38,9 @@ public class TokenService {
 
     public String validate(String token) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
+            Algorithm algorithm = Algorithm.HMAC256(this.secret);
             return JWT.require(algorithm)
-                      .withIssuer(issuer)
+                      .withIssuer(this.issuer)
                       .build()
                       .verify(token)
                       .getSubject();

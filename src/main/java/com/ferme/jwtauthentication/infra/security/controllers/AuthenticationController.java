@@ -27,7 +27,7 @@ public class AuthenticationController {
         try {
             UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
             Authentication auth = this.authenticationManager.authenticate(usernamePassword);
-            String token = tokenService.generate(((User) auth.getPrincipal()));
+            String token = this.tokenService.generate(((User) auth.getPrincipal()));
 
             return new LoginResponseDTO(token);
         } catch (AuthenticationException e) {

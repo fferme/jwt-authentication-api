@@ -12,9 +12,9 @@ public class ValueOfEnumValidator implements ConstraintValidator<ValueOfEnum, Ch
 
     @Override
     public void initialize(ValueOfEnum annotation) {
-        acceptedValues = Stream.of(annotation.enumClass().getEnumConstants())
-                               .map(Enum::toString)
-                               .collect(Collectors.toList());
+        this.acceptedValues = Stream.of(annotation.enumClass().getEnumConstants())
+                                    .map(Enum::toString)
+                                    .collect(Collectors.toList());
     }
 
     @Override
@@ -23,10 +23,10 @@ public class ValueOfEnumValidator implements ConstraintValidator<ValueOfEnum, Ch
             return true;
         }
 
-        if (!acceptedValues.contains(value.toString())) {
+        if (!this.acceptedValues.contains(value.toString())) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(
-                       "Só são aceitos os valores " + acceptedValues)
+                       "Só são aceitos os valores " + this.acceptedValues)
                    .addConstraintViolation();
             return false;
         }

@@ -1,28 +1,17 @@
 package com.ferme.jwtauthentication.user.controllers;
 
-import java.util.List;
-import java.util.UUID;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.ferme.jwtauthentication.user.dto.UserDTO;
 import com.ferme.jwtauthentication.user.services.UserService;
-
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @Validated
 @RestController
@@ -35,35 +24,35 @@ public class UserController {
 
     @GetMapping
     public List<UserDTO> getAll() {
-        return userService.getAll();
+        return this.userService.getAll();
     }
 
     @GetMapping("/{id}")
     public UserDTO findById(@PathVariable @NotNull UUID id) {
-        return userService.findById(id);
+        return this.userService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public UserDTO create(@RequestBody @Valid UserDTO userDTO) {
-        return userService.create(userDTO);
+        return this.userService.create(userDTO);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public UserDTO update(@PathVariable @NotNull UUID id, @RequestBody @Valid @NotNull UserDTO newUserDTO) {
-        return userService.update(id, newUserDTO);
+        return this.userService.update(id, newUserDTO);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable @NotNull UUID id) {
-        userService.deleteById(id);
+        this.userService.deleteById(id);
     }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAll() {
-        userService.deleteAll();
+        this.userService.deleteAll();
     }
 }
